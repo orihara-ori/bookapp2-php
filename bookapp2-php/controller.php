@@ -1,6 +1,8 @@
 <?php
-$user = 'appuser';
-$password = '12345';
+require_once("config.php");
+
+$user = DB_USER;
+$password = DB_PASSWORD;
 $dbname = 'bookapp';
 $host = 'localhost';
 $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
