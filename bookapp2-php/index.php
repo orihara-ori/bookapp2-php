@@ -47,6 +47,12 @@ $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
             <label><input type='hidden' name='genre' value=<?= $value['genre'] ?>></label>
             <input type='submit' value='編集'>
           </form>
+
+          <!-- 削除ボタン -->
+          <form method='POST' action='deletecontroller.php'>
+            <label><input type='hidden' name='id' value=<?= $value['id'] ?>></label>
+            <input type='submit' value='削除'>
+          </form>
           <?php
         }
       ?>
