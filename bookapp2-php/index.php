@@ -41,17 +41,17 @@ $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
           echo "<li>本文:", $value['content'], "<br>ジャンル:",$value['genre'], "</li>";
           ?>
           <!-- 編集ボタン -->
-          <form method='GET' action='edit.php'>
-            <label><input type='hidden' name='id' value=<?= $value['id'] ?>></label>
-            <label><input type='hidden' name='content' value=<?= $value['content'] ?>></label>
-            <label><input type='hidden' name='genre' value=<?= $value['genre'] ?>></label>
-            <input type='submit' value='編集'>
+          <form method="GET" action="edit.php">
+            <label><input type="hidden" name="id" value="<?= $value['id'] ?>"></label>
+            <label><input type="hidden" name="content" value="<?= $value['content'] ?>"></label>
+            <label><input type="hidden" name="genre" value="<?= $value['genre'] ?>"></label>
+            <input type="submit" value="編集">
           </form>
 
           <!-- 削除ボタン -->
-          <form method='POST' action='deletecontroller.php'>
-            <label><input type='hidden' name='id' value=<?= $value['id'] ?>></label>
-            <input type='submit' value='削除'>
+          <form method="POST" action="deletecontroller.php">
+            <label><input type="hidden" name="id" value="<?= $value['id'] ?>"></label>
+            <input type="submit" value="削除">
           </form>
           <?php
         }
