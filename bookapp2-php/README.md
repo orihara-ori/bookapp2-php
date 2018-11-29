@@ -7,7 +7,7 @@ sudo apt-get install mysql-server mysql-client -y
 sudo apt-get install php-mysql php-mbstring -y
 ```
 
-#開発環境用のDB,テーブル,ユーザーを作成
+# 開発環境用のDB,テーブル,ユーザーを作成
 - mysqlにrootでログインしapplication.sqlを読み込む
 - 作成されるユーザー名はappuser、パスワードの初期値は12345
 ```
