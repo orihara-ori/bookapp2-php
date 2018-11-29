@@ -19,8 +19,8 @@ $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
   <div>
     <form method="POST" action="controller.php">
       <ul>
-        <li><label>本文:<input type="text" name="content"></label></li>
-        <li><label>ジャンル:<input type="text" name="genre"></label></li>
+        <li><label>本文: <input type="text" name="content"></label></li>
+        <li><label>ジャンル: <input type="text" name="genre"></label></li>
         <li><input type="submit" value="投稿する"></li>
       </ul>
     </form>
@@ -38,7 +38,16 @@ $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
     <ul>
       <?php
         foreach($result as $value){
-          echo "<li>", "本文:", $value['content'], "<br>", "ジャンル:",$value['genre'], "</li>";
+          echo "<li>本文:", $value['content'], "<br>ジャンル:",$value['genre'], "</li>";
+          ?>
+          <!-- 編集ボタン -->
+          <form method='GET' action='edit.php'>
+            <label><input type='hidden' name='id' value=<?= $value['id'] ?>></label>
+            <label><input type='hidden' name='content' value=<?= $value['content'] ?>></label>
+            <label><input type='hidden' name='genre' value=<?= $value['genre'] ?>></label>
+            <input type='submit' value='編集'>
+          </form>
+          <?php
         }
       ?>
     </ul>
