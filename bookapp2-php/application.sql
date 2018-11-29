@@ -1,7 +1,7 @@
--- mysql ユーザー名:appuser データベース名:bookapp
--- ログインして source application.sql で読み込み
-
 CREATE DATABASE bookapp DEFAULT CHARACTER SET UTF8;
+
+-- appuser(password:12345)を作成
+GRANT ALL PRIVILEGES ON bookapp.* TO appuser@localhost IDENTIFIED BY '12345';
 
 use bookapp;
 
