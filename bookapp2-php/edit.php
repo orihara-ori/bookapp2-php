@@ -3,6 +3,7 @@ session_start();
 
 if (is_null($_SESSION['USERID'])) {
   header('Location: login.php');
+  exit();
 }
 ?>
 
