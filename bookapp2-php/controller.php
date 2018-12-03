@@ -17,6 +17,15 @@ $stm->bindValue(':content', $content, PDO::PARAM_STR);
 $stm->bindValue(':genre', $genre, PDO::PARAM_STR);
 $stm->execute();
 
+if (isset($_FILES['imagefile'])) {
+  $tmp_file = $_FILES['imagefile']['tmp_name'];
+  if (is_uploaded_file($tmp_file)) {
+    $id = $pdo->lastInsertId();
+    mkdir('./images/' . $id);
+    move_uploaded_file($tmp_file, './images/' . $id . '/' . $_FILES['imagefile']['name']);
+  }
+}
+
 header('Location: http://192.168.33.10:3000');
 exit();
 ?>
