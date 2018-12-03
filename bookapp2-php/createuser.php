@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+require_once("Model/User.php");
 
 session_start();
 
@@ -19,14 +20,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+  $user = new User();
+  $user_id = $user->addUser($username, $hashed_password);
 
-  $sql = "INSERT INTO users (name, password) VALUES (:username, :hashed_password)";
-  $stm = $pdo->prepare($sql);
-  $stm->bindValue(':username', $username, PDO::PARAM_STR);
-  $stm->bindValue(':hashed_password', $hashed_password, PDO::PARAM_STR);
-  $stm->execute();
-
-  $_SESSION['USERID'] = $username;
+  $_SESSION['USERID'] = $user_id;
   header('Location: index.php');
   exit();
 }
