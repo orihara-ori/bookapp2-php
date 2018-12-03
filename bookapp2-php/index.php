@@ -23,10 +23,11 @@ $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
 </head>
 <body>
   <div>
-    <form method="POST" action="controller.php">
+    <form method="POST" action="controller.php" enctype='multipart/form-data'>
       <ul>
         <li><label>本文: <input type="text" name="content"></label></li>
         <li><label>ジャンル: <input type="text" name="genre"></label></li>
+        <li><label>画像添付: <input type='file' name='imagefile'></label></li>
         <li><input type="submit" value="投稿する"></li>
       </ul>
     </form>
