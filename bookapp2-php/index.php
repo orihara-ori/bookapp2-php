@@ -47,6 +47,15 @@ $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
       <?php
         foreach($result as $value){
           echo "<li>本文:", $value['content'], "<br>ジャンル:",$value['genre'], "</li>";
+          if (file_exists('images/' . $value['id'] . '/' )) {  // image/id/ の中にファイルが存在する場合
+            $dir = opendir('images/' . $value['id']);
+            while ($image_name = readdir($dir)) {  // ディレクトリを順番に読み込み
+              if ($image_name != "." && $image_name != "..") {  // .と..を除外
+                echo '<img src="images/' . $value['id'] . '/' . $image_name .'" width="256" height="256">';
+              }
+            }
+            closedir($dir);
+          }
           ?>
           <!-- 編集ボタン -->
           <form method="GET" action="edit.php">
