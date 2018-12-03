@@ -11,3 +11,10 @@ create table notes (
     genre varchar(20) not null,
     primary key (id)
 );
+
+create table users (
+    id int auto_increment not null,
+    name varchar(20) not null,
+    password varchar(255) not null,
+    primary key (id)
+);

@@ -1,6 +1,13 @@
 <?php
 require_once("config.php");
 
+session_start();
+
+if (is_null($_SESSION['USERID'])) {
+  header('Location: login.php');
+  exit();
+}
+
 $user = DB_USER;
 $password = DB_PASSWORD;
 $dbname = 'bookapp';
@@ -58,6 +65,6 @@ $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
       ?>
     </ul>
   </div>
-
+  <div><a href='logout.php'>ログアウト</a></div>
 </body>
 </html>
