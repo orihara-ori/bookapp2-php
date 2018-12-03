@@ -24,7 +24,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
   $result = $user->getUserByName($username);
 
   if (password_verify($password, $result['password'])) {
-    $_SESSION['USERID'] = $username;
+    $_SESSION['USERID'] = $result['id'];
     header('Location: index.php');
     exit();
   }
