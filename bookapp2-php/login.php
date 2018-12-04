@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+require_once("Model/User.php");
 
 session_start();
 
@@ -19,14 +20,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
 
-  $sql = "SELECT * FROM users WHERE name = :username";
-  $stm = $pdo->prepare($sql);
-  $stm->bindValue(':username', $username, PDO::PARAM_STR);
-  $stm->execute();
-  $result = $stm->fetch(PDO::FETCH_ASSOC);
+  $user = new User();
+  $result = $user->getUserByName($username);
 
   if (password_verify($password, $result['password'])) {
-    $_SESSION['USERID'] = $username;
+    $_SESSION['USERID'] = $result['id'];
     header('Location: index.php');
     exit();
   }
@@ -50,5 +48,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
       <li><input type="submit" value="ログインする"></li>
     </form>
   </div>
+  <a href="/createuser.php">ユーザー作成</a>
 </body>
 </html>
