@@ -1,19 +1,11 @@
 <?php
 require_once("config.php");
-
-$user = DB_USER;
-$password = DB_PASSWORD;
-$dbname = 'bookapp';
-$host = 'localhost';
-$dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
-$pdo = new PDO($dsn, $user, $password);
+require_once("Model/Note.php");
 
 $id = $_POST["id"];
 
-$sql = "DELETE FROM notes WHERE id = :id";
-$stm = $pdo->prepare($sql);
-$stm->bindValue(':id', $id, PDO::PARAM_STR);
-$stm->execute();
+$note = new Note();
+$note->destroyNoteById($id);
 
 if (file_exists('images/' . $id . '/' )) {  // image/id/ の中にファイルが存在する場合
   $dir = opendir('images/' . $id);
