@@ -8,8 +8,6 @@ if (is_null($_SESSION['USERID'])) {
   exit();
 }
 
-echo $_SESSION['USERID'];
-
 $user = DB_USER;
 $password = DB_PASSWORD;
 $dbname = 'bookapp';

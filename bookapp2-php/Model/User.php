@@ -4,7 +4,6 @@ require_once("config.php");
 class User {
     private $db;
     function __construct() {
-        print "In BaseClass constructor\n";
         $user = DB_USER;
         $password = DB_PASSWORD;
         $dbname = 'bookapp';
