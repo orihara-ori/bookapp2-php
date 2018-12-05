@@ -32,5 +32,15 @@ class User {
         return $this->db->lastInsertId();
     }
 
+    public function findById($id) {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stm = $this->db->prepare($sql);
+        $stm->bindValue(':id', $id, PDO::PARAM_STR);
+        $stm->execute();
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
 
 }
