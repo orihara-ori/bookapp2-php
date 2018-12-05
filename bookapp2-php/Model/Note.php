@@ -52,10 +52,11 @@ class Note {
     return $note_id;
   }
 
-  public function destroyNoteById($note_id) {
-    $sql = "DELETE FROM notes WHERE id = :id";
+  public function destroyNoteById($note_id, $user_id) {
+    $sql = "DELETE FROM notes WHERE id = :id AND user_id = :user_id";
     $stm = $this->db->prepare($sql);
     $stm->bindValue(':id', $note_id, PDO::PARAM_STR);
+    $stm->bindValue(':user_id', $user_id, PDO::PARAM_STR);
     $stm->execute();
     return $note_id;
   }
