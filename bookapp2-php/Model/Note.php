@@ -12,9 +12,10 @@ class Note {
     $this->db = new PDO($dsn, $user, $password);
   }
 
-  public function getAllNotes() {
-    $sql = "SELECT * FROM notes";
+  public function getAllCurrentUsersNotes($user_id) {
+    $sql = "SELECT * FROM notes WHERE user_id = :user_id";
     $stm = $this->db->prepare($sql);
+    $stm->bindValue(':user_id', $user_id, PDO::PARAM_STR);
     $stm->execute();
     $result = $stm->fetchAll(PDO::FETCH_ASSOC);
     return $result;
@@ -29,11 +30,13 @@ class Note {
     return $result;
   }
 
-  public function addNote($content, $genre) {
-    $sql = "INSERT INTO notes (content, genre) VALUES (:content, :genre)";
+  public function addNote($content, $genre, $user_id, $parent_id) {
+    $sql = "INSERT INTO notes (content, genre, user_id, parent_id) VALUES (:content, :genre, :user_id, :parent_id)";
     $stm = $this->db->prepare($sql);
     $stm->bindValue(':content', $content, PDO::PARAM_STR);
     $stm->bindValue(':genre', $genre, PDO::PARAM_STR);
+    $stm->bindValue(':user_id', $user_id, PDO::PARAM_STR);
+    $stm->bindValue(':parent_id', $parent_id, PDO::PARAM_STR);
     $stm->execute();
     return $this->db->lastInsertId();
   }

@@ -32,8 +32,9 @@ if (is_null($_SESSION['USERID'])) {
   <div>
     <!-- note一覧を取りにDBへ接続 -->
     <?php
+      $user_id = $_SESSION['USERID'];
       $note = new Note();
-      $result = $note->getAllNotes();
+      $result = $note->getAllCurrentUsersNotes($user_id);
     ?>
     <ul>
       <?php
