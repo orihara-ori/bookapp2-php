@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+require_once("Model/Note.php");
 
 session_start();
 
@@ -7,14 +8,6 @@ if (is_null($_SESSION['USERID'])) {
   header('Location: login.php');
   exit();
 }
-
-echo $_SESSION['USERID'];
-
-$user = DB_USER;
-$password = DB_PASSWORD;
-$dbname = 'bookapp';
-$host = 'localhost';
-$dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +32,8 @@ $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
   <div>
     <!-- note一覧を取りにDBへ接続 -->
     <?php
-      $pdo = new PDO($dsn, $user, $password);
-      $sql = "SELECT * FROM notes";
-      $stm = $pdo->prepare($sql);
-      $stm->execute();
-      $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+      $note = new Note();
+      $result = $note->getAllNotes();
     ?>
     <ul>
       <?php

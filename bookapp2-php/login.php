@@ -10,13 +10,6 @@ if (isset($_SESSION['USERID'])) {
 }
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-  $user = DB_USER;
-  $password = DB_PASSWORD;
-  $dbname = 'bookapp';
-  $host = 'localhost';
-  $dsn = "mysql:host={$host};dbname={$dbname};charset=utf8";
-  $pdo = new PDO($dsn, $user, $password);
-
   $username = $_POST['username'];
   $password = $_POST['password'];
 
@@ -28,7 +21,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     header('Location: index.php');
     exit();
   }
-  exit();
 }
 ?>
 
