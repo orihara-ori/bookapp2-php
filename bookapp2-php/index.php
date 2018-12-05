@@ -16,8 +16,10 @@ if (is_null($_SESSION['USERID'])) {
   <meta charset="utf-8" />
   <title>bookapp</title>
   <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
+<div id="name_display">no login</div>
   <div>
     <form method="POST" action="controller.php" enctype='multipart/form-data'>
       <ul>
@@ -68,5 +70,17 @@ if (is_null($_SESSION['USERID'])) {
     </ul>
   </div>
   <div><a href='logout.php'>ログアウト</a></div>
+
+<script>
+  $.ajax({
+    type: "GET",
+    url: "/api/nickname.php",
+    success: function(msg){
+      if (msg.status == "ok") {
+        $('#name_display').text(msg.body.name+"さんようこそ！");
+      }
+    }
+  });
+</script>
 </body>
 </html>
