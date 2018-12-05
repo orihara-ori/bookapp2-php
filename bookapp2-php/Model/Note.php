@@ -21,10 +21,10 @@ class Note {
     return $result;
   }
 
-   public function findNoteById($id) {
+   public function findNoteById($note_id) {
     $sql = "SELECT * FROM notes WHERE id = :id";
     $stm = $this->db->prepare($sql);
-    $stm->bindValue(':id', $id, PDO::PARAM_STR);
+    $stm->bindValue(':id', $note_id, PDO::PARAM_STR);
     $stm->execute();
     $result = $stm->fetch(PDO::FETCH_ASSOC);
     return $result;
@@ -41,22 +41,23 @@ class Note {
     return $this->db->lastInsertId();
   }
 
-  public function updateNote($content, $genre, $id) {
-    $sql = "UPDATE notes SET content = :content, genre = :genre WHERE id = :id";
+  public function updateNote($content, $genre, $note_id, $user_id) {
+    $sql = "UPDATE notes SET content = :content, genre = :genre WHERE id = :id AND user_id = :user_id";
     $stm = $this->db->prepare($sql);
-    $stm->bindValue(':id', $id, PDO::PARAM_STR);
+    $stm->bindValue(':id', $note_id, PDO::PARAM_STR);
     $stm->bindValue(':content', $content, PDO::PARAM_STR);
     $stm->bindValue(':genre', $genre, PDO::PARAM_STR);
+    $stm->bindValue(':user_id', $user_id, PDO::PARAM_STR);
     $stm->execute();
-    return $this->db->lastInsertId();
+    return $note_id;
   }
 
-  public function destroyNoteById($id) {
+  public function destroyNoteById($note_id) {
     $sql = "DELETE FROM notes WHERE id = :id";
     $stm = $this->db->prepare($sql);
-    $stm->bindValue(':id', $id, PDO::PARAM_STR);
+    $stm->bindValue(':id', $note_id, PDO::PARAM_STR);
     $stm->execute();
-    return $this->db->lastInsertId();
+    return $note_id;
   }
 }
 ?>
