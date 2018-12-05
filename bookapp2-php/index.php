@@ -67,6 +67,7 @@ if (is_null($_SESSION['USERID'])) {
       ?>
     </ul>
   </div>
+  <div><a href='profile.php'>ユーザー情報</a></div>
   <div><a href='logout.php'>ログアウト</a></div>
 </body>
 </html>
