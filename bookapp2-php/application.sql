@@ -18,3 +18,9 @@ create table users (
     password varchar(255) not null,
     primary key (id)
 );
+
+alter table notes add (
+    user_id int not null,
+    parent_id int,
+    created_at datetime not null default current_timestamp -- 日本時間ではない
+);

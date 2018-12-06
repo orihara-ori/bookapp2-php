@@ -12,48 +12,53 @@ class Note {
     $this->db = new PDO($dsn, $user, $password);
   }
 
-  public function getAllNotes() {
-    $sql = "SELECT * FROM notes";
+  public function getAllCurrentUsersNotes($user_id) {
+    $sql = "SELECT * FROM notes WHERE user_id = :user_id";
     $stm = $this->db->prepare($sql);
+    $stm->bindValue(':user_id', $user_id, PDO::PARAM_STR);
     $stm->execute();
     $result = $stm->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
 
-   public function findNoteById($id) {
+   public function findNoteById($note_id) {
     $sql = "SELECT * FROM notes WHERE id = :id";
     $stm = $this->db->prepare($sql);
-    $stm->bindValue(':id', $id, PDO::PARAM_STR);
+    $stm->bindValue(':id', $note_id, PDO::PARAM_STR);
     $stm->execute();
     $result = $stm->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
 
-  public function addNote($content, $genre) {
-    $sql = "INSERT INTO notes (content, genre) VALUES (:content, :genre)";
+  public function addNote($content, $genre, $user_id, $parent_id) {
+    $sql = "INSERT INTO notes (content, genre, user_id, parent_id) VALUES (:content, :genre, :user_id, :parent_id)";
     $stm = $this->db->prepare($sql);
     $stm->bindValue(':content', $content, PDO::PARAM_STR);
     $stm->bindValue(':genre', $genre, PDO::PARAM_STR);
+    $stm->bindValue(':user_id', $user_id, PDO::PARAM_STR);
+    $stm->bindValue(':parent_id', $parent_id, PDO::PARAM_STR);
     $stm->execute();
     return $this->db->lastInsertId();
   }
 
-  public function updateNote($content, $genre, $id) {
-    $sql = "UPDATE notes SET content = :content, genre = :genre WHERE id = :id";
+  public function updateNote($content, $genre, $note_id, $user_id) {
+    $sql = "UPDATE notes SET content = :content, genre = :genre WHERE id = :id AND user_id = :user_id";
     $stm = $this->db->prepare($sql);
-    $stm->bindValue(':id', $id, PDO::PARAM_STR);
+    $stm->bindValue(':id', $note_id, PDO::PARAM_STR);
     $stm->bindValue(':content', $content, PDO::PARAM_STR);
     $stm->bindValue(':genre', $genre, PDO::PARAM_STR);
+    $stm->bindValue(':user_id', $user_id, PDO::PARAM_STR);
     $stm->execute();
-    return $this->db->lastInsertId();
+    return $note_id;
   }
 
-  public function destroyNoteById($id) {
-    $sql = "DELETE FROM notes WHERE id = :id";
+  public function destroyNoteById($note_id, $user_id) {
+    $sql = "DELETE FROM notes WHERE id = :id AND user_id = :user_id";
     $stm = $this->db->prepare($sql);
-    $stm->bindValue(':id', $id, PDO::PARAM_STR);
+    $stm->bindValue(':id', $note_id, PDO::PARAM_STR);
+    $stm->bindValue(':user_id', $user_id, PDO::PARAM_STR);
     $stm->execute();
-    return $this->db->lastInsertId();
+    return $note_id;
   }
 }
 ?>
