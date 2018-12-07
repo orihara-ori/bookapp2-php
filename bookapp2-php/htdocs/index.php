@@ -27,6 +27,7 @@ foreach($result as $value){
 }
 
 $smarty = new Smarty_Bookapp();
+$smarty->caching = 0;
 $smarty->assign('notes', $result);
 $smarty->assign('images', $images);
 $smarty->display('index.tpl');

@@ -20,7 +20,7 @@ $note_id = $note->addNote($content, $genre, $user_id, $parent_id);
 if (isset($_FILES['imagefile'])) {
   $tmp_file = $_FILES['imagefile']['tmp_name'];
   if (is_uploaded_file($tmp_file)) {
-    mkdir('./images/' . $note_id);
+    @mkdir('./images/' . $note_id);
     move_uploaded_file($tmp_file, './images/' . $note_id . '/' . $_FILES['imagefile']['name']);
   }
 }
